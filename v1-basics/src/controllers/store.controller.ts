@@ -6,12 +6,7 @@ import { catchAsync } from "../utils/catchAsync";
 export const createStore = catchAsync(async (req: Request, res: Response) => {
   const { name, latitude, longitude } = req.body;
 
-  // ✅ Basic validation
-  if (!name || !latitude || !longitude) {
-    throw new Error("All fields are required");
-  }
-
-  // 📝 Insert store
+  // 1️⃣) 📝 Insert store
   const result = await pool.query(
     `
             INSERT INTO stores (name, latitude, longitude)
@@ -21,9 +16,18 @@ export const createStore = catchAsync(async (req: Request, res: Response) => {
     [name, latitude, longitude],
   );
 
-  // 🎉 Success response
-  return res.status(201).json({
+  // 2️⃣) 🎉 Success response
+const createdStore = result.rows[0];
+
+return res.status(201).json({
     status: "success",
-    data: result.rows[0],
-  });
+    message: "🏬 Store created successfully ✅",
+    data: {
+        store: createdStore,
+    },
+    meta: {
+        timestamp: new Date().toISOString(),
+        requestId: req.headers["x-request-id"] ?? null,
+    },
+});
 });
