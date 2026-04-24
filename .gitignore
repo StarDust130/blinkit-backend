@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Testing / tooling caches
+.cache/
+.eslintcache
+.parcel-cache/
+.nyc_output/
+
+# Runtime artifacts
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# PostgreSQL / local database files
+*.sql
+dump.sql
+*.dump
+*.backup
+*.bak
+pgdata/
+postgres-data/
+
+# Prisma local artifacts, if used later
+prisma/dev.db
+prisma/*.db-journal
