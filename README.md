@@ -1,26 +1,30 @@
 # 🛒 Blinkit Quick Commerce Backend 🚀
+
 <p align="center">
-  <img src="v1-basics/src/public/banner.png" alt="Blinkit Clone Banner" width="100%">
+  <!-- FIX: Re-path to the image so VS Code and GitHub can both find it from the root folder -->
+  <img src="./v1-basics/src/public/banner.png" alt="Blinkit Clone Banner" width="100%">
 </p>
 
-
+# 🛒 Blinkit Quick Commerce Backend 🚀
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white" alt="Express"/>
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
   <img src="https://img.shields.io/badge/Redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white" alt="Redis"/>
   <img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white" alt="Kafka"/>
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-  <img src="https://img.shields.io/badge/PostGIS-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostGIS"/>
 </p>
 
-⚡️ **Mastering System Design & Production-Grade Engineering** ⚡️
+**"A beautiful backend is the heart of every great startup!"** 🫀💻
 
-Welcome to my journey! I am building a highly scalable, real-world backend clone of **Blinkit** (10-minute grocery delivery) to completely master backend engineering. This is completely focused on building large-scale, fault-tolerant distributed systems from scratch. 🧠💻
+> _"We don't just deliver groceries in 10 minutes. We deliver high-availability, fault-tolerance, and highly scalable distributed systems."_ 🚀
+
+Welcome to the **Ultimate Backend Engineering Journey!** I am building a highly scalable, real-world backend clone of **Blinkit** (10-minute grocery delivery) to completely master backend engineering.
 
 <p align="center">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjRteG5qYW1jMnF3ODc3MDIzbDZtbzVvNGFpZGZtNDRkNTdsMXRzeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Fast Delivery GIF" width="350">
+  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" alt="Cool Coding Anime GIF" width="500" style="border-radius: 12px; box-shadow: 0px 0px 20px rgba(0, 255, 128, 0.4);">
 </p>
 
 ---
@@ -80,4 +84,17 @@ npm install
 npm run dev
 ```
 
-**"A beautiful backend is the heart of every great startup!"** ❤️‍🔥
+---
+
+<div align="center">
+  <h3>⚡️ <b>"Pessimism in locking, optimism in caching, and absolute pragmatism in deployment."</b> ⚡️</h3>
+  
+  <p>
+    <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight&quote=You%20can%20have%20data%20without%20information,%20but%20you%20cannot%20have%20information%20without%20data.&author=Daniel%20Keys%20Moran" alt="Programming Quote">
+  </p>
+
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%">
+  
+  <i>Powered by Terminal 💻, fueled by Caffeine ☕, and built for immense Scale 🌐</i><br>
+  <b>See you on the leaderboard!</b> 👑
+</div>
