@@ -1,8 +1,9 @@
+# 🛒 Blinkit Quick Commerce Backend 🚀
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Blinkit%20Backend%20Clone&fontSize=60&fontAlignY=38&desc=A%2010-Minute%20Delivery%20System%20Architecture&descAlignY=61&descAlign=62" alt="Blinkit Clone Dynamic Banner" width="100%">
+  <img src="v1-basics/src/public/banner.png" alt="Blinkit Clone Banner" width="100%">
 </p>
 
-# 🛒 Blinkit Quick Commerce Backend 🚀
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
