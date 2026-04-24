@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import pool from "../config/db";
 import { catchAsync } from "../utils/catchAsync";
+import { sendResponse } from "../utils/response";
 
 //! Create Store - POST /api/v1/stores 🚀
 export const createStore = catchAsync(async (req: Request, res: Response) => {
@@ -19,15 +20,11 @@ export const createStore = catchAsync(async (req: Request, res: Response) => {
   // 2️⃣) 🎉 Success response
 const createdStore = result.rows[0];
 
-return res.status(201).json({
-    status: "success",
-    message: "🏬 Store created successfully ✅",
-    data: {
-        store: createdStore,
-    },
-    meta: {
-        timestamp: new Date().toISOString(),
-        requestId: req.headers["x-request-id"] ?? null,
-    },
+return sendResponse({
+  req,
+  res,
+  statusCode: 201,
+  message: "🏬 Store created successfully",
+  data: { store: createdStore },
 });
 });
