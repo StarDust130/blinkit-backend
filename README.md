@@ -5,8 +5,6 @@
   <img src="./v1-basics/src/public/banner.png" alt="Blinkit Clone Banner" width="100%">
 </p>
 
-# 🛒 Blinkit Quick Commerce Backend 🚀
-
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
   <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white" alt="Express"/>
@@ -24,8 +22,10 @@
 Welcome to the **Ultimate Backend Engineering Journey!** I am building a highly scalable, real-world backend clone of **Blinkit** (10-minute grocery delivery) to completely master backend engineering.
 
 <p align="center">
-  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" alt="Cool Coding Anime GIF" width="500" style="border-radius: 12px; box-shadow: 0px 0px 20px rgba(0, 255, 128, 0.4);">
+  <img src="https://media.tenor.com/Mo2I9sPMJOQAAAAm/zatch-bell-golden-gash.webp" alt="Cool Coding Anime GIF" width="500" style="border-radius: 12px; box-shadow: 0px 0px 20px rgba(237, 237, 234, 0.4);">
 </p>
+
+<h3 align="center">🤣 Literally my brain while learning to build this massive backend at 3 AM! 🤯🔥💻💀</h3>
 
 ---
 
