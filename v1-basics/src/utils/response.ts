@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-// 🎯 Allowed status codes only
+// 🎯 Allowed status codes only (FIX: it over ENGINEERING)
 type AllowedStatusCode =
   | 200 // OK
   | 201 // Created
@@ -36,6 +36,21 @@ type SendResponseArgs = {
   data?: unknown;
 };
 
+const humanReadableTimestamp = () =>{
+   return new Intl.DateTimeFormat("en-IN", {
+        timeZone: "Asia/Kolkata",
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+        .format(new Date())
+        .replace(" at ", ", ")
+  
+}
+
 export const sendResponse = ({
   req,
   res,
@@ -44,11 +59,13 @@ export const sendResponse = ({
   data,
 }: SendResponseArgs) => {
   return res.status(statusCode).json({
-    status: "success",
+    status: statusCode < 400 ? "success" : "error",
     message,
+    error: statusCode >= 400 ? { message } : null,
     data,
     meta: {
-      timestamp: new Date().toISOString(), // 🕒 response time
+      timestamp: humanReadableTimestamp(), // 🕒 response time
+
       requestId: req.headers["x-request-id"] ?? null, // 🆔 trace id
     },
   });

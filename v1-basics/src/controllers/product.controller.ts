@@ -29,6 +29,36 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
 
 
 //! getAllProducts - GET /api/v1/products
-export const getAllProducts = catchAsync((req: Request, res: Response) => {
+export const getAllProducts = catchAsync(async (req: Request, res: Response) => {
+
+    const limit = Math.max(Number(req.query.limit) || 10, 50);
+    const page = Math.min(Number(req.query.page) || 1,1);
+
+    const offset = (page - 1) * limit;
+
+    //1️⃣ Get product from DB
+    const result = await pool.query(
+      ` SELECT id, name, description, base_price, category
+      FROM products
+      ORDER BY created_at DESC
+      LIMIT $1 OFFSET $2
+        `,
+      [limit, offset],
+    );
+
+
+    //2️⃣ Send Response
+    return sendResponse({
+      res,
+      req,
+      message: "Product as you want✌️🎉",
+      statusCode: 200,
+      data: {
+        result: { products: result.rows[0]},
+      },
+    });
+
+
+
 
 })
