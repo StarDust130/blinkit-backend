@@ -33,6 +33,13 @@ export const getAllProducts = catchAsync(async (req: Request, res: Response) => 
 
     const limit = Math.max(Number(req.query.limit) || 10, 50);
     const page = Math.min(Number(req.query.page) || 1,1);
+    
+    const rawSort = req.query.sort;
+
+    const sort =
+      typeof rawSort === "string" && rawSort.toLowerCase() === "asc"
+        ? "ASC"
+        : "DESC";
 
     const offset = (page - 1) * limit;
 
@@ -40,7 +47,7 @@ export const getAllProducts = catchAsync(async (req: Request, res: Response) => 
     const result = await pool.query(
       ` SELECT id, name, description, base_price, category
       FROM products
-      ORDER BY created_at DESC
+      ORDER BY created_at ${sort}
       LIMIT $1 OFFSET $2
         `,
       [limit, offset],
