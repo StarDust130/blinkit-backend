@@ -28,3 +28,31 @@ return sendResponse({
   data: { store: createdStore },
 });
 });
+
+//! Get All Stores - GET /api/v1/stores 🚀
+export const getAllStores = catchAsync(async(req: Request, res: Response) => {
+  // 1️⃣ Get all stores from DB
+  const result = await pool.query(
+    "SELECT id, name, latitude, longitude  FROM stores",
+  );
+
+  // Exact Stores and Total Stores from results
+  const stores = result.rows;
+  const total_stores = result.rowCount;
+
+
+
+  //2️⃣ Send all stores to user
+  return sendResponse({
+    req,
+    res,
+    statusCode: 201,
+    message: "All Stores send succesfully✌️",
+    data: {
+      total_stores,
+      stores,
+    },
+  });
+}
+  
+)
