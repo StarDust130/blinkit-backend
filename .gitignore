@@ -53,3 +53,5 @@ postgres-data/
 # Prisma local artifacts, if used later
 prisma/dev.db
 prisma/*.db-journal
+
+TODO.txt
