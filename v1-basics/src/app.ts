@@ -1,5 +1,7 @@
 import express from "express";
 import storeRoutes from "./routes/store.routes";
+import productRoutes from "./routes/product.routes"
+
 import { globalErrorHandler } from "./utils/error";
 import { requestIdMiddleware } from "./middleware/requestId";
 
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
 
 //! Routes 📍
 app.use("/api/v1/stores", storeRoutes );
+app.use("/api/v1/products", productRoutes );
 
 //🐞🐞 --- ERROR HANDLING (Must be at the bottom!) 🐞🐞 ---
 app.use(globalErrorHandler); // ⬅️ The Janitor waits here for any thrown errors
