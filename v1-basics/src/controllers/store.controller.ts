@@ -30,44 +30,45 @@ return sendResponse({
 });
 
 //! Get All Stores - GET /api/v1/stores 🌍
-export const getAllStores = catchAsync(async(req: Request, res: Response) => {
-  // 1️⃣) 🧮 Pagination Setup (Read from URL, e.g., ?limit=10&page=2)
-  // If user doesn't send page or limit, we default to page 1, limit 10
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 10;
+export const getAllStores = catchAsync(async (req: Request, res: Response) => {
+  // 1️⃣ 📥 Read query params (pagination + sorting)
+  const page = Math.max(Number(req.query.page) || 1, 1);
+  const limit = Math.min(Number(req.query.limit) || 10, 50); // 🔒 max 50
+  const sort =
+    (req.query.sort as string)?.toLowerCase() === "asc" ? "ASC" : "DESC";
 
-  // 🦘 Calculate how many rows to skip
+  // 🦘 Calculate offset
   const offset = (page - 1) * limit;
 
-  // 2️⃣) 🔍 Fetch from Database
-  const result = await pool.query(
-    `SELECT id, name, latitude, longitude  
-    FROM stores 
-    ORDER BY created_at DESC -- 🕒 Newest stores first
-    LIMIT $1 OFFSET $2 -- 🛑 Stop the server from crashing!
+  // 2️⃣ 🔍 Fetch paginated stores
+const result = await pool.query(
+  `
+  SELECT id, name, latitude, longitude, created_at,
+         COUNT(*) OVER() AS total_count
+  FROM stores
+  ORDER BY created_at ${sort}
+  LIMIT $1 OFFSET $2
+  `,
+  [limit, offset],
+);
 
-    `,
-    [limit, offset],
-  );
 
-  // Exact Stores and Total Stores from results
-  const stores = result.rows;
-  const total_result = result.rowCount;
-  const totalResult = await pool.query("SELECT COUNT(*) FROM stores");
-  const total_stores = Number(totalResult.rows[0].count);
 
-  // 3️⃣) 🎉 Success Response
+  // 3️⃣ 📊 Get total count (for pagination UI)
+  const total_stores = result.rows[0]?.total_count || 0;
+
+  // 4️⃣ 🎯 Send response
   return sendResponse({
     req,
     res,
-    statusCode: 201,
+    statusCode: 200,
     message: "🌍 Stores fetched successfully",
     data: {
+      page,
+      limit,
       total_stores,
-      total_result,
-      stores,
+      total_pages: Math.ceil(total_stores / limit), // 📄 useful for frontend
+      stores: result.rows,
     },
   });
-}
-  
-)
+});
