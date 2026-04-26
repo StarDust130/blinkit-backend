@@ -6,41 +6,120 @@ datasource db {
   provider = "postgresql"
 }
 
-// Store
+// =================================================
+// 🚀 Quick Guide
+// This file defines database tables + relations.
+// 🏪📦🎁 = warehouse data
+// 👤🧾🛒 = checkout data
+// =================================================
+
+// -------------------------------------------------
+// PHASE 1: THE WAREHOUSE
+// -------------------------------------------------
+
+//1️⃣ Store 🏪
+// Simple: store basic info + location.
 model Store {
-  id        String      @id @default(uuid()) @db.Uuid
-  name      String
-  latitude  Float
-  longitude Float
-  inventory Inventory[]
-  createdAt DateTime    @default(now()) @map("created_at")
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @db.VarChar(255)
+  latitude  Decimal  @db.Decimal(10, 8)
+  longitude Decimal  @db.Decimal(11, 8)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relationships
+  inventories Inventory[]
+  orders      Order[] // A store has many orders
 
   @@map("stores")
 }
 
-// Product
+//2️⃣ Product 📦
+// Simple: product details + base price.
 model Product {
-  id          String      @id @default(uuid()) @db.Uuid
-  name        String
-  description String?
-  basePrice   Decimal     @map("base_price") @db.Decimal(10, 2)
-  category    String
-  inventory   Inventory[]
-  createdAt   DateTime    @default(now()) @map("created_at")
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String   @db.VarChar(255)
+  description String?  @db.Text
+  basePrice   Decimal  @map("base_price") @db.Decimal(10, 2)
+  category    String   @db.VarChar(100)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relationships
+  inventories Inventory[]
+  orderItems  OrderItem[] // A product can be in many orders
 
   @@map("products")
 }
 
-// Inventory
+//3️⃣ Inventory 🎁🎈
+// Simple: stock of one product in one store.
 model Inventory {
-  storeId   String   @map("store_id") @db.Uuid
-  productId String   @map("product_id") @db.Uuid
-  quantity  Int      @default(0)
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quantity Int    @default(0)
 
+  // Foreign Keys
+  storeId   String @map("store_id") @db.Uuid
+  productId String @map("product_id") @db.Uuid
+
+  // Relationships
   store   Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  @@id([storeId, productId])
+  // 🛡️ The 1% Constraint: Prevent duplicate rows for the same product in the same store
+  @@unique([storeId, productId])
   @@map("inventory")
+}
+
+// -------------------------------------------------
+// PHASE 2: THE CHECKOUT ENGINE
+// -------------------------------------------------
+// 4️⃣ Simple: app users who place orders. 👤
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  phone     String   @unique @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relationships
+  orders Order[]
+
+  @@map("users")
+}
+
+// 5️⃣ Order
+model Order {
+  // Simple: one checkout order by a user.
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  totalAmount Decimal  @map("total_amount") @db.Decimal(10, 2)
+  status      String   @default("PENDING") @db.VarChar(50) // PENDING, PAID, CANCELLED, DELIVERED
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Foreign Keys
+  userId  String @map("user_id") @db.Uuid
+  storeId String @map("store_id") @db.Uuid
+
+  // Relationships
+  user  User        @relation(fields: [userId], references: [id])
+  store Store       @relation(fields: [storeId], references: [id])
+  items OrderItem[] // The receipt details
+
+  @@map("orders")
+}
+
+//6️⃣ OrderItem
+model OrderItem {
+  // Simple: each product line inside an order.
+  id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quantity   Int
+  priceAtBuy Decimal @map("price_at_buy") @db.Decimal(10, 2) // 🛡️ CRITICAL: Save the price at the moment of purchase
+
+  // Foreign Keys
+  orderId   String @map("order_id") @db.Uuid
+  productId String @map("product_id") @db.Uuid
+
+  // Relationships
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
 }
