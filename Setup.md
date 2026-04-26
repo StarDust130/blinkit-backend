@@ -13,13 +13,13 @@ npm init -y
 ### 2️⃣ Install Core 🧠
 
 ```bash
-npm i express cors dotenv pg
+npm i express cors dotenv pg zod
 ```
 
 ### 3️⃣ Install Dev Tools 🛠️
 
 ```bash
-npm i -D typescript nodemon ts-node @types/node @types/express
+npm install --save-dev nodemon typescript @types/node @types/express ts-node
 ```
 
 ### 4️⃣ Setup TypeScript 📘
