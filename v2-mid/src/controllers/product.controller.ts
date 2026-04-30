@@ -47,6 +47,7 @@ export const getAllProducts = catchAsync(
 
     // 2️⃣ 🔄 Fetch products + total count (parallel = faster)
     const [products, total_products] = await Promise.all([
+      // Task 1
       prisma.product.findMany({
         skip, // offset
         take: limit, // limit
@@ -62,6 +63,7 @@ export const getAllProducts = catchAsync(
         },
       }),
 
+      // Task 2
       prisma.product.count(), // total rows for pagination
     ]);
 
