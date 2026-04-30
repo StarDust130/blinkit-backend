@@ -4,7 +4,7 @@ import { sendResponse } from "../utils/response";
 import prisma from "../config/prisma"
 
 
-
+//! Create Stores -  POST /api/v1/stores
 export const createStore = catchAsync(async (req: Request, res: Response) => {
   const { name, latitude, longitude } = req.body;
 
