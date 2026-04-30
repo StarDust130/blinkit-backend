@@ -1,0 +1,7 @@
+import { Request, Response } from "express";
+import { catchAsync } from "../utils/catchAsync";
+
+
+export const getAllStores = catchAsync(async (req: Request , res: Response) => {
+
+});
