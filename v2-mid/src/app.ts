@@ -1,4 +1,5 @@
 import express from "express";
+import { globalErrorHandler } from "./utils/error";
 
 
 
@@ -25,6 +26,6 @@ app.use((req, res, next) => {
 
 
 //🐞🐞 --- ERROR HANDLING (Must be at the bottom!) 🐞🐞 ---
-// app.use(globalErrorHandler); // ⬅️ The Janitor waits here for any thrown errors
+app.use(globalErrorHandler); // ⬅️ The Janitor waits here for any thrown errors
 
 export default app
