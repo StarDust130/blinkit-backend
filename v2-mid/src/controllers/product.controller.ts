@@ -26,3 +26,9 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
     data: { product },
   });
 });
+
+//! GetAllProduct - GET /api/v2/product
+export const getAllProducts = catchAsync(async (req: Request, res: Response) => {
+    //1️⃣) 
+
+})

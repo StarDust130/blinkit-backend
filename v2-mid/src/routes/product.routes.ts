@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createProduct } from "../controllers/product.controller";
+import {
+  createProduct,
+  getAllProducts,
+} from "../controllers/product.controller";
 import { validate } from "../utils/validate";
 import { productBodySchema } from "../types/product.schema";
 
@@ -11,5 +14,7 @@ router.post(
   validate(productBodySchema), // 🧪 validate input first
   createProduct, // 🚀 then run controller
 );
+
+router.get("/", getAllProducts);
 
 export default router;
