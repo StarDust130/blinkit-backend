@@ -8,7 +8,7 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
   const { name, description, basePrice, category } = req.body;
 
   //1️⃣)  📦 Create Products in DB (Prisma)
-  const createProduct = await prisma.product.create({
+  const product = await prisma.product.create({
     data: {
       name,
       description,
@@ -23,6 +23,6 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
     res,
     statusCode: 201,
     message: "📦 Product created successfully",
-    data: { store: createProduct },
+    data: { product },
   });
 });
