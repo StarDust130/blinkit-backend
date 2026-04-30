@@ -1,5 +1,6 @@
 import express from "express";
 import { globalErrorHandler } from "./utils/error";
+import storeRouters from "./routes/store.routes"
 
 
 
@@ -22,6 +23,9 @@ app.use((req, res, next) => {
 
 
 //----------------------------
+
+//! Routes 📍
+app.use("/api/v2/stores" , storeRouters)
 
 
 
