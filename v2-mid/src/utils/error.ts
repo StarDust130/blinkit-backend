@@ -7,13 +7,17 @@ export const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.error("🔥 SYSTEM ERROR:", err.message);
+  console.error("🔥 SYSTEM ERROR:", err);
 
-  // If we didn't specify a status code, default to 500 (Server Exploded)
   const statusCode = err.statusCode || 500;
+
+  const isProd = process.env.NODE_ENV === "production";
+
+  const message =
+    isProd && statusCode === 500 ? "Something went wrong" : err.message;
 
   res.status(statusCode).json({
     status: "error",
-    message: err.message || "Internal Server Error",
+    message,
   });
 };
