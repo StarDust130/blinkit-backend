@@ -6,10 +6,6 @@ export const requestIdMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  const requestId = req.headers["x-request-id"] || randomUUID();
-
-  // store safely
-  (req as any).requestId = requestId;
-
+  req.headers["x-request-id"] = randomUUID(); // generate id
   next();
 };
