@@ -1,13 +1,26 @@
 import { Request, Response } from "express";
-import { z } from "zod";
 import prisma from "../config/prisma.js";
 import { catchAsync } from "../utils/catchAsync.js";
+import { sendResponse } from "../utils/response.js";
 
-
-
-// 2 & 3. The Engine + Janitor
+//! Create User - POST /api/v2/user
 export const createUser = catchAsync(async (req: Request, res: Response) => {
-  // Step A: Validate the req.body using userSchema.parse()
-  // Step B: Use prisma.user.create() to save the user
-  // Step C: res.status(201).json({ success: true, data: newUser })
+  const { name, email, phone } = req.body;
+
+  //1️⃣) Save the user 😤
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+      phone,
+    },
+  });
+
+  //2️⃣) Send Response
+  return sendResponse({
+    res,
+    message: "👤User Created Successfully 🌟✌️",
+    statusCode: 201,
+    data: {user}
+  });
 });
