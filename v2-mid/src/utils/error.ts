@@ -1,23 +1,35 @@
 import { Request, Response, NextFunction } from "express";
+import { AppError } from "../utils/AppError";
+import { Prisma } from "@prisma/client";
 
-// Express knows this is the Global Error Handler because it has 4 parameters (err, req, res, next)
 export const globalErrorHandler = (
   err: any,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  console.error("🔥 SYSTEM ERROR:", err);
+  let error = { ...err };
+  error.message = err.message;
 
-  const statusCode = err.statusCode || 500;
+  // 🛑 Catch Prisma Unique Constraint Error (Duplicate Email/Phone)
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    if (err.code === "P2002") {
+      // Find out which field caused the duplicate (email or phone)
+      const target = err.meta?.target as string[];
+      const field = target ? target[0] : "Field";
+      error = new AppError(
+        `This ${field} is already registered. Please use another.`,
+        400,
+      );
+    }
+  }
 
-  const isProd = process.env.NODE_ENV === "production";
-
-  const message =
-    isProd && statusCode === 500 ? "Something went wrong" : err.message;
+  // 🎯 Default Error Format
+  const statusCode = error.statusCode || 500;
+  const message = error.message || "Internal Server Error";
 
   res.status(statusCode).json({
-    status: "error",
-    message,
+    success: false,
+    error: message,
   });
 };
