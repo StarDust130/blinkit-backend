@@ -37,6 +37,7 @@ export const createUser = catchAsync(
 
     return sendResponse({
       res,
+      req,
       message: "👤 User Created Successfully 🌟✌️",
       statusCode: 201,
       data: { user },
