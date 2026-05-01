@@ -5,7 +5,7 @@ type SendResponseArgs<T = unknown> = {
   statusCode?: number;
   message?: string;
   data?: T;
-  req?: Request; // optional, only if you want requestId
+  req: Request; 
 };
 
 export const sendResponse = <T = unknown>({
@@ -22,7 +22,7 @@ export const sendResponse = <T = unknown>({
     message,
     ...(isError ? {} : { data }), // don’t send data on errors
     meta: {
-      requestId: req?.headers["x-request-id"] ?? null,
+      requestId: req.headers["x-request-id"] ?? null, // 🆔 trace id
       timestamp: Date.now(), // fast + standard
     },
   });
