@@ -3,6 +3,7 @@ import { globalErrorHandler } from "./utils/error";
 import storeRouters from "./routes/store.routes"
 import productRoutes from "./routes/product.routes";
 import inventorytRoutes from "./routes/inventory.routes";
+import userRoutes from "./routes/user.routes";
 import { requestIdMiddleware } from "./middleware/requestIdMiddleware";
 
 
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 app.use("/api/v2/stores" , storeRouters)
 app.use("/api/v2/products", productRoutes ); 
 app.use("/api/v2/inventory", inventorytRoutes); 
+app.use("/api/v2/user", userRoutes); 
 
 
 
