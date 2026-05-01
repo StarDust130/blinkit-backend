@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const userSchema = z
   .object({
+    body: z.object({
     // 👤 Name: trimmed, readable, safe characters only
     name: z
       .string()
@@ -24,4 +25,4 @@ export const userSchema = z
       .trim()
       .regex(/^\+?[1-9]\d{9,14}$/, "Invalid phone number format"),
   })
-  .strict();
+  })
