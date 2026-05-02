@@ -51,6 +51,7 @@ model Product {
   @@map("products")
 }
 
+
 //3️⃣ Inventory 🎁🎈
 // Simple: stock of one product in one store.
 model Inventory {
