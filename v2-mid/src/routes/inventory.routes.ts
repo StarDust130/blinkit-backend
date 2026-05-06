@@ -4,7 +4,7 @@ import {
   syncInventory,
 } from "../controllers/inventory.controller";
 import { validate } from "../utils/validate";
-import { syncInventorySchema } from "../types/inventorySchema";
+import { syncInventorySchema } from "../types/inventoryschema";
 
 
 const router = Router();
