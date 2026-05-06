@@ -4,6 +4,7 @@ import storeRouters from "./routes/store.routes"
 import productRoutes from "./routes/product.routes";
 import inventorytRoutes from "./routes/inventory.routes";
 import userRoutes from "./routes/user.routes";
+import checkoutRoutes from "./routes/checkout.routes";
 import { requestIdMiddleware } from "./middleware/requestIdMiddleware";
 
 
@@ -30,6 +31,7 @@ app.use("/api/v2/stores" , storeRouters)
 app.use("/api/v2/products", productRoutes ); 
 app.use("/api/v2/inventory", inventorytRoutes); 
 app.use("/api/v2/user", userRoutes); 
+app.use("/api/v2/checkout", checkoutRoutes);
 
 
 
