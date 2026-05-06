@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import prisma from "../config/prisma.js";
-import { catchAsync } from "../utils/catchAsync.js";
-import { AppError } from "../utils/AppError.js";
-import { sendResponse } from "../utils/response.js";
+import prisma from "../config/prisma";
+import { catchAsync } from "../utils/catchAsync";
+import { AppError } from "../utils/AppError";
+import { sendResponse } from "../utils/response";
 
 export const processCheckout = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
