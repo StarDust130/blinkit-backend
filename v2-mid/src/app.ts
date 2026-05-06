@@ -1,13 +1,11 @@
 import express from "express";
 import { globalErrorHandler } from "./utils/error";
-import storeRouters from "./routes/store.routes"
+import storeRouters from "./routes/store.routes";
 import productRoutes from "./routes/product.routes";
 import inventorytRoutes from "./routes/inventory.routes";
 import userRoutes from "./routes/user.routes";
 import checkoutRoutes from "./routes/checkout.routes";
 import { requestIdMiddleware } from "./middleware/requestIdMiddleware";
-
-
 
 const app = express();
 
@@ -20,22 +18,24 @@ app.use(requestIdMiddleware);
 //---------------------------
 // 📝 Log every incoming request (method + URL + requestId)
 app.use((req, res, next) => {
-  console.log(`🤓 [${req.headers["x-request-id"]}] ${req.method} ${req.url}`);
+  const reqId = req.headers["x-request-id"] || "-";
+  // Log when the response is finished so we can include the status code
+  res.on("finish", () => {
+    console.log(`🤓 [${reqId}] ${req.method} ${req.url} -> ${res.statusCode}`);
+  });
   next();
 });
 
 //----------------------------
 
 //! Routes 📍
-app.use("/api/v2/stores" , storeRouters)
-app.use("/api/v2/products", productRoutes ); 
-app.use("/api/v2/inventory", inventorytRoutes); 
-app.use("/api/v2/user", userRoutes); 
+app.use("/api/v2/stores", storeRouters);
+app.use("/api/v2/products", productRoutes);
+app.use("/api/v2/inventory", inventorytRoutes);
+app.use("/api/v2/user", userRoutes);
 app.use("/api/v2/checkout", checkoutRoutes);
-
-
 
 //🐞🐞 --- ERROR HANDLING (Must be at the bottom!) 🐞🐞 ---
 app.use(globalErrorHandler); // ⬅️ The Janitor waits here for any thrown errors
 
-export default app
+export default app;
