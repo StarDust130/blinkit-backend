@@ -1,14 +1,20 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export const checkoutSchema = z.object({
   body: z.object({
-    store_id: z.string({ message: "Invalid Store Id" }),
-    user_id: z.string({ message: "Invalid User Id" }),
-    items: z.array(
-      z.object({
-        productId: z.string({ message: "Invalid Product Id" }),
-        quantity: z.number({ message: "Invalid Quantity" }),
-      })
-    ),
+    // 1️⃣ Use top-level z.uuid() and the new 'error' property
+    storeId: z.uuid({ error: "Invalid Store ID format" }),
+    userId: z.uuid({ error: "Invalid User ID format" }),
+    items: z
+      .array(
+        z.object({
+          productId: z.uuid({ error: "Invalid Product ID format" }),
+          quantity: z
+            .number()
+            .int()
+            .positive({ error: "Quantity must be at least 1" }),
+        }),
+      )
+      .min(1, { error: "Cart cannot be empty" }),
   }),
 });
