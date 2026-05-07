@@ -1,0 +1,16 @@
+# Global Git
+.git
+.gitignore
+
+# Virtual Environments & Build outputs
+node_modules/
+backend/env/
+
+# Caches
+.idea/
+.vscode/
+
+# OS/Logs
+.DS_Store
+npm-debug.log*
+yarn-error.log*
