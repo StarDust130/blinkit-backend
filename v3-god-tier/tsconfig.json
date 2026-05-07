@@ -28,5 +28,7 @@
     "skipLibCheck": true
     // ⚡ Skips checking library type files
     // Faster builds, avoids useless external type errors
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
