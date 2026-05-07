@@ -1,27 +1,13 @@
 {
   "name": "v3-god-tier",
   "version": "1.0.0",
-  "description": "🚀 Advanced production-grade backend architecture built with TypeScript, Express, Prisma, Redis, and RabbitMQ. Designed for scalable APIs, event-driven workflows, caching, workers, and enterprise-level backend systems.",
+  "description": "🚀 Production-grade backend built with TypeScript, Express, Prisma, Redis, and RabbitMQ.",
   "keywords": [
     "backend",
-    "microservices",
     "typescript",
-    "nodejs",
     "express",
     "prisma",
-    "postgresql",
-    "redis",
-    "rabbitmq",
-    "api",
-    "scalable",
-    "production-ready",
-    "worker",
-    "event-driven",
-    "security",
-    "high-performance",
-    "docker",
-    "saas",
-    "enterprise"
+    "redis"
   ],
   "author": "Thor ⚡",
   "license": "MIT",
@@ -34,12 +20,7 @@
     "dev": "nodemon --exec tsx src/server.ts",
     "worker": "tsx src/workers/order.worker.ts",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "lint": "tsc --noEmit",
-    "clean": "rm -rf dist",
-    "dev:watch": "nodemon --watch src --exec tsx src/server.ts"
+    "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^7.8.0",
@@ -62,8 +43,5 @@
     "prisma": "^7.8.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
-  },
-  "engines": {
-    "node": ">=20.0.0"
   }
 }
