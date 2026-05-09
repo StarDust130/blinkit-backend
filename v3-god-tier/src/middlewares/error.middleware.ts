@@ -1,13 +1,21 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
+
+type AppError = Error & {
+  statusCode?: number;
+};
 
 export const errorMiddleware = (
-  err,
-  req: Request,
+  err: AppError,
+  _req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
-  res.status(err.statusCode || 500).json({
+  const statusCode = err.statusCode ?? 500;
+
+  res.status(statusCode).json({
     success: false,
-    message: err.message || "Internal Server Error",
+    message:
+      process.env.NODE_ENV === "production" && statusCode === 500
+        ? "Internal Server Error 😭"
+        : err.message,
   });
 };
