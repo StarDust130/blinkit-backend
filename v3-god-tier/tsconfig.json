@@ -1,34 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    // ⚡ Output modern JavaScript features
-    // Node.js 20+ understands this directly
-
+    "target": "ES2022",
     "module": "NodeNext",
-    // 📦 Uses modern Node.js ES modules system
-    // Required because package.json has "type": "module"
-
     "moduleResolution": "NodeNext",
-    // 🔍 Tells TypeScript how to find imports
-    // Matches modern Node.js behavior
-
-    "outDir": "./dist",
-    // 📂 Compiled JS files go here
-
     "rootDir": "./src",
-    // 📁 Your source TypeScript files live here
+    "outDir": "./dist",
 
     "strict": true,
-    // 🛡️ Enables strict type checking
-    // VERY important for catching bugs early
 
     "esModuleInterop": true,
-    // 🤝 Makes CommonJS packages work nicely with imports
+    "skipLibCheck": true,
 
-    "skipLibCheck": true
-    // ⚡ Skips checking library type files
-    // Faster builds, avoids useless external type errors
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+
+  "include": ["src"]
 }
