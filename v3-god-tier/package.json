@@ -12,7 +12,7 @@
   "author": "Thor ⚡",
   "license": "MIT",
   "main": "index.js",
-  "type": "module",
+
   "private": true,
   "scripts": {
     "dev": "nodemon --watch src --exec tsx src/server.ts",
