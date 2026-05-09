@@ -1,16 +1,27 @@
-# Global Git
+# 📦 Version Control
 .git
 .gitignore
 
-# Virtual Environments & Build outputs
+# 🔧 Dependencies & Build
 node_modules/
 backend/env/
 
-# Caches
+# 💾 IDE Cache
 .idea/
 .vscode/
 
-# OS/Logs
+# 🖥️ System & Logs
 .DS_Store
 npm-debug.log*
 yarn-error.log*
+
+# 📄 Documentation
+TODO.md 
+README.md
+
+# 🏗️ Build Output
+.dist
+
+# 🐳 Docker Config
+Dockerfile 
+docker-compose.yml
