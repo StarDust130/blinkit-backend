@@ -1,24 +1,44 @@
 {
   "compilerOptions": {
+    // 🚀 Output modern JavaScript
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+
+    // 📦 Use modern Node.js ESM system
+    "module": "nodenext",
+
+    // 📂 Source code folder
     "rootDir": "./src",
+
+    // 🏗️ Compiled JS output folder
     "outDir": "./dist",
-    "ignoreDeprecations": "6.0",
+
+    // 🛡️ Strong TypeScript safety checks
+    "strict": true,
+
+    // 🔄 Helps old CommonJS packages work with import/export
+    "esModuleInterop": true,
+
+    // ⚡ Skip checking library types for faster builds
+    "skipLibCheck": true,
+
+    // 🖥️ Prevent Windows/Linux filename case bugs
+    "forceConsistentCasingInFileNames": true,
+
+    // 📍 Base path for cleaner imports
     "baseUrl": "./src",
-    
+
+    // ✨ Custom path alias
+    // Example:
+    // import x from "@/utils/test.js"
     "paths": {
       "@/*": ["*"]
     },
 
-    "strict": true,
-
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-
-    "forceConsistentCasingInFileNames": true
+    // 🔕 Hide TypeScript 6 deprecation warning
+    "ignoreDeprecations": "6.0"
   },
 
+  // 📂 Only compile files inside src
   "include": ["src"]
 }
+

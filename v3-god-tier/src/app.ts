@@ -14,6 +14,13 @@ app.use(helmet());
 logger.info("Server started");
 logger.error(Error);
 
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+  });
+});
+
 // Register middleware, routes, and other setup here
 
 //! ERROR middleware
