@@ -15,12 +15,14 @@
   "type": "module",
   "private": true,
   "scripts": {
-  "dev": "nodemon --watch src --exec tsx src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js",
-  "worker": "tsx src/workers/order.worker.ts",
-  "db:generate": "prisma generate",
-  "db:migrate": "prisma migrate dev"
+    "dev": "nodemon --watch src --exec tsx src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "worker": "tsx src/workers/order.worker.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^7.8.0",
@@ -39,9 +41,13 @@
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.6.2",
+    "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
     "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
     "prisma": "^7.8.0",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2"
   }
 }
