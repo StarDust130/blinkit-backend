@@ -25,7 +25,7 @@
 
 # 🗄️ Phase 3 — Database Design
 
-- [ ] Design users table
+- ✅ Design users table
 - [ ] Design addresses table
 - [ ] Design stores table
 - [ ] Design products table
