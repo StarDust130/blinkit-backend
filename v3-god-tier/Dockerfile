@@ -1,5 +1,5 @@
 # 🟢 Use official Node.js image
-FROM node:22-slim
+FROM node:22-alpine
 
 # 📂 App folder inside container
 WORKDIR /app
