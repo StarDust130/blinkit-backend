@@ -34,7 +34,6 @@ model User {
   orders    Order[] // 🧾 One-to-many: orders
   carts     Cart[] // 🛒 One-to-many: carts
 
-  @@index([phone]) // 🔎 Index for quick lookup by phone
   @@index([role]) // 🔐 Index to filter by role
 }
 
