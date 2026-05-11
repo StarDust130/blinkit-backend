@@ -11,3 +11,40 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// 👤 User model
+model User {
+  //  - stores app users
+  id String @id @default(cuid()) // 🆔 Primary id (cuid)
+
+  name  String // ✍️ Full name
+  email String? @unique // 📧 Optional unique email
+  phone String  @unique // 📞 Unique phone number (login)
+
+  role UserRole @default(CUSTOMER) // 🧭 User role (enum)
+
+  isVerified Boolean @default(false) // ✅ Verified status
+
+  createdAt DateTime @default(now()) // 🕒 Creation timestamp
+  updatedAt DateTime @updatedAt // 🔁 Auto-updated timestamp
+
+  deletedAt DateTime? // 🗑️ Soft-delete timestamp (nullable)
+
+  // addresses Address[] // 🏠 One-to-many: addresses
+  // orders    Order[] // 🧾 One-to-many: orders
+  // carts     Cart[] // 🛒 One-to-many: carts
+
+  
+  @@index([phone])  // 🔎 Index for quick lookup by phone
+  @@index([role])   // 🔐 Index to filter by role
+}
+
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  DELIVERY
+  STORE_MANAGER
+}
+
+
