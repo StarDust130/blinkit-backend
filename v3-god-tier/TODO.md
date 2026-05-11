@@ -26,16 +26,16 @@
 # 🗄️ Phase 3 — Database Design
 
 - ✅ Design users table
-- [ ] Design addresses table
-- [ ] Design stores table
-- [ ] Design products table
-- [ ] Design inventory table
-- [ ] Design carts table
-- [ ] Design orders table
-- [ ] Design payments table
-- [ ] Add indexes properly
-- [ ] Learn transactions deeply
-- [ ] Learn row locking
+- ✅ Design addresses table
+- ✅ Design stores table
+- ✅ Design products table
+- ✅ Design inventory table
+- ✅ Design carts table
+- ✅ Design orders table
+- ✅ Design payments table
+- ✅ Add indexes properly
+- ✅ Learn transactions deeply
+- ✅ Learn row locking
 
 ---
 

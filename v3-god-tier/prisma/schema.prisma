@@ -31,14 +31,12 @@ model User {
   deletedAt DateTime? // 🗑️ Soft-delete timestamp (nullable)
 
   addresses Address[] // 🏠 One-to-many: addresses
-  // orders    Order[] // 🧾 One-to-many: orders
-  // carts     Cart[] // 🛒 One-to-many: carts
+  orders    Order[] // 🧾 One-to-many: orders
+  carts     Cart[] // 🛒 One-to-many: carts
 
-  
-  @@index([phone])  // 🔎 Index for quick lookup by phone
-  @@index([role])   // 🔐 Index to filter by role
+  @@index([phone]) // 🔎 Index for quick lookup by phone
+  @@index([role]) // 🔐 Index to filter by role
 }
-
 
 enum UserRole {
   CUSTOMER
@@ -55,15 +53,15 @@ model Address {
 
   label String // Home, Work, etc.
 
-  street String
-  city String
-  state String
-  country String
+  street     String
+  city       String
+  state      String
+  country    String
   postalCode String
 
   landmark String?
 
-  latitude Float
+  latitude  Float
   longitude Float
 
   isDefault Boolean @default(false)
@@ -75,4 +73,162 @@ model Address {
 
   @@index([userId])
   @@index([latitude, longitude])
+}
+
+// 🏪 Dark stores / warehouses
+model Store {
+  id String @id @default(cuid()) // 🆔 Store id
+
+  name String // 🏷️ Store name
+
+  phone String? // 📞 Store contact
+
+  address String // 📍 Store address
+
+  latitude  Float // 🌍 Latitude
+  longitude Float // 🌍 Longitude
+
+  isActive Boolean @default(true) // ✅ Store active or not
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  inventories Inventory[] // 📦 Store inventory
+
+  @@index([latitude, longitude]) // 📍 Geo search
+}
+
+// 🛍️ Product catalog
+model Product {
+  id String @id @default(cuid()) // 🆔 Product id
+
+  name String // 🏷️ Product name
+
+  description String? // 📝 Product details
+
+  imageUrl String? // 🖼️ Product image
+
+  brand String? // 🏭 Brand name
+
+  category String // 📂 Product category
+
+  unit String // ⚖️ kg, litre, piece
+
+  price Float // 💰 Product price
+
+  isActive Boolean @default(true) // ✅ Available or not
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  inventories Inventory[] // 📦 Store stock
+  carts       Cart[] // 🛒 Product carts
+
+  @@index([category]) // 🔎 Category filtering
+  @@index([name]) // 🔍 Product search
+}
+
+// 📦 Product stock inside stores
+model Inventory {
+  id String @id @default(cuid()) // 🆔 Inventory id
+
+  storeId   String // 🏪 Store id
+  productId String // 🛍️ Product id
+
+  quantity Int // 📦 Current stock
+
+  reservedQuantity Int @default(0) // 🔒 Reserved stock
+
+  isAvailable Boolean @default(true) // ✅ In stock or not
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([storeId, productId]) // 🚫 Prevent duplicate stock rows
+  @@index([storeId]) // 🔎 Store lookup
+  @@index([productId]) // 🔍 Product lookup
+}
+
+// 🛒 User cart items
+model Cart {
+  id String @id @default(cuid()) // 🆔 Cart id
+
+  userId String // 👤 User id
+
+  productId String // 🛍️ Product id
+
+  quantity Int // 🔢 Quantity added
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  user User @relation(fields: [userId], references: [id])
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId]) // 🚫 Prevent duplicate cart item
+  @@index([userId]) // 🔎 User cart lookup
+}
+
+// 🧾 User orders
+model Order {
+  id String @id @default(cuid()) // 🆔 Order id
+
+  userId String // 👤 User id
+
+  totalAmount Float // 💰 Final order amount
+
+  status OrderStatus @default(PENDING) // 📦 Order status
+
+  paymentStatus PaymentStatus @default(PENDING) // 💳 Payment status
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  user User @relation(fields: [userId], references: [id])
+
+  payment Payment? // 💳 Payment relation
+
+  @@index([userId]) // 🔎 User orders
+  @@index([status]) // 📦 Status filtering
+}
+
+// 💳 Payment records
+model Payment {
+  id String @id @default(cuid()) // 🆔 Payment id
+
+  orderId String @unique // 🧾 Order id
+
+  provider String // 🏦 Razorpay / Stripe
+
+  transactionId String? // 🔑 Gateway transaction id
+
+  amount Float // 💰 Paid amount
+
+  status PaymentStatus @default(PENDING) // 📦 Payment status
+
+  createdAt DateTime @default(now()) // 🕒 Created time
+  updatedAt DateTime @updatedAt // 🔁 Updated time
+
+  order Order @relation(fields: [orderId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PACKED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
 }
