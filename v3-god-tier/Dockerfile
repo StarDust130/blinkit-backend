@@ -4,19 +4,23 @@ FROM node:22-alpine
 # 📂 App folder inside container
 WORKDIR /app
 
-# 📦 Copy package files first
+# 📦 Copy package files
 COPY package*.json ./
 
 # ⚡ Install dependencies
 RUN npm install
 
-# 📂 Copy all source code
+
+# 📂 Copy source code
 COPY . .
+
+# ⚡ Generate Prisma client
+RUN npx prisma generate
 
 # 🏗️ Build TypeScript
 RUN npm run build
 
-# 🌐 App port
+# 🌐 Expose backend port
 EXPOSE 5000
 
 # 🚀 Start production server
