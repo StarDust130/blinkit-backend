@@ -1,5 +1,5 @@
 
-import { prisma } from "@/infrastructure/db/prisma.js";
+import { prisma } from "../../infrastructure/db/prisma.js";
 
 import { RegisterInput } from "./auth.types.js";
 

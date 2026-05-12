@@ -1,8 +1,8 @@
 
 import { Request, Response } from "express";
 
-import { asyncHandler } from "@/shared/utils/async-handler.js";
-import { sendResponse } from "@/shared/utils/send-response.js";
+import { asyncHandler } from "../../shared/utils/async-handler.js";
+import { sendResponse } from "../../shared/utils/send-response.js";
 
 import { loginUser, registerUser } from "./auth.service.js";
 

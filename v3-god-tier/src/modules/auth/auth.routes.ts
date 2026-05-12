@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { validateRequest } from "@/shared/middlewares/validate-request.js";
+import { validateRequest } from "../../shared/middlewares/validate-request.js";
 
 import {
   loginController,
