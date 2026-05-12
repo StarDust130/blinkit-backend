@@ -1,29 +1,34 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { logger } from "./infrastructure/logger/index.js";
-import { errorMiddleware } from "./middlewares/error.middleware.js";
+import morgan from "morgan";
+
+import { errorMiddleware } from "./shared/middlewares/error.middleware.js";
 
 const app = express();
-app.use(express.json());
 
-
-app.use(cors());
+// 🛡️ Secure HTTP headers
 app.use(helmet());
 
-logger.info("Server started");
-logger.error(Error);
+// 🌍 Enable frontend/backend communication
+app.use(cors());
 
+// 📦 Parse JSON request body
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({
+// 📝 HTTP request logger
+app.use(morgan("dev"));
+
+// ❤️ Health check route
+app.get("/health", (req, res) => {
+  res.status(200).json({
     success: true,
+    message: "🚀 Server is running",
   });
 });
 
-// Register middleware, routes, and other setup here
-
-//! ERROR middleware
+// 🚨 Global error middleware (always LAST)
 app.use(errorMiddleware);
 
 export default app;
+
