@@ -12,10 +12,10 @@ export const registerSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-// 🔐 Login validation
+// 🔑 Login validation
 export const loginSchema = z.object({
-  email: z.email("Invalid email"),
+  identifier: z.string().min(3),
 
-  password: z.string().min(6, "Password required"),
+  password: z.string().min(6),
 });
 
