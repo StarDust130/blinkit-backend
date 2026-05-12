@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { AppError } from "@/shared/errors/app-error.js";
+import { AppError } from "../../shared/errors/app-error.js";
 
 import { createUser,  findUserByIdentifier } from "./auth.repository.js";
 import { LoginInput, RegisterInput } from "./auth.types.js";

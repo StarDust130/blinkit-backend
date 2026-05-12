@@ -1,5 +1,5 @@
 
-import { prisma } from "@/infrastructure/db/prisma.js";
+import { prisma } from "../../infrastructure/db/prisma.js";
 
 import { RegisterInput } from "./auth.types.js";
 
@@ -9,6 +9,7 @@ export const findUserByEmail = async (email: string) => {
     where: { email },
   });
 };
+
 
 // ➕ Create new user
 export const createUser = async (
