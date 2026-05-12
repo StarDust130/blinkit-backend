@@ -3,6 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import authRoutes from "./modules/auth/auth.routes.js";
+
 import { errorMiddleware } from "./shared/middlewares/error.middleware.js";
 
 const app = express();
@@ -26,6 +28,10 @@ app.get("/health", (req, res) => {
     message: "🚀 Server is running",
   });
 });
+
+
+// ROUTES 📍
+app.use("/api/v3/auth", authRoutes);
 
 // 🚨 Global error middleware (always LAST)
 app.use(errorMiddleware);
