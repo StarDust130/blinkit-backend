@@ -21,6 +21,8 @@ model User {
   email String? @unique // 📧 Optional unique email
   phone String  @unique // 📞 Unique phone number (login)
 
+  password String // 🔐 Hashed password
+
   role UserRole @default(CUSTOMER) // 🧭 User role (enum)
 
   isVerified Boolean @default(false) // ✅ Verified status
