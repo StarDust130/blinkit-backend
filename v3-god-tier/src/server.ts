@@ -1,7 +1,12 @@
-import app from "./app.js";
-import { env } from "./config/env.js";
-import { logger } from "./infrastructure/logger/logger.js";
+import "dotenv/config";
 
-app.listen(env.PORT, () => {
-  logger.info(`Server running on port ${env.PORT}`);
+import app from "./app.js";
+
+// 🌐 App port
+const PORT = process.env.PORT || 5000;
+
+// 🚀 Start backend server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
