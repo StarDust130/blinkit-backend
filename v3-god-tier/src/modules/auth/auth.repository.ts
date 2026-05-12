@@ -10,6 +10,7 @@ export const findUserByEmail = async (email: string) => {
   });
 };
 
+
 // ➕ Create new user
 export const createUser = async (
   data: RegisterInput & { password: string }
