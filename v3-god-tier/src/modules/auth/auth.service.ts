@@ -3,13 +3,13 @@ import jwt from "jsonwebtoken";
 
 import { AppError } from "@/shared/errors/app-error.js";
 
-import { createUser, findUserByEmail } from "./auth.repository.js";
+import { createUser,  findUserByIdentifier } from "./auth.repository.js";
 import { LoginInput, RegisterInput } from "./auth.types.js";
 
 // 🔐 Register new user
 export const registerUser = async (payload: RegisterInput) => {
   // 🔍 Check existing user
-  const existingUser = await findUserByEmail(payload.email);
+  const existingUser = await findUserByIdentifier(payload.phone);
 
   if (existingUser) {
     throw new AppError("User already exists", 400);
@@ -45,7 +45,7 @@ export const registerUser = async (payload: RegisterInput) => {
 // 🔑 Login user
 export const loginUser = async (payload: LoginInput) => {
   // 🔍 Find user
-  const user = await findUserByEmail(payload.email);
+  const user = await findUserByIdentifier(payload.identifier);
 
   if (!user) {
     throw new AppError("Invalid credentials", 401);
